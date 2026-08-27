@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk, Crisis and Security Management - SolarWinds & Colonial Pipeline | Bijay Kumar Yadav</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header h1 span {
+            color: #e74c3c;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .header .meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header .meta .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+
+        .header .meta .badge.highlight {
+            background: #e74c3c;
+        }
+
+        .header .meta .badge.solarwinds {
+            background: #f39c12;
+        }
+
+        .header .meta .badge.colonial {
+            background: #e74c3c;
+        }
+
+        .student-info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .student-info span {
+            opacity: 0.9;
+        }
+
+        .student-info strong {
+            color: #fff;
+        }
+
+        .section {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            padding: 20px 30px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .section-title.intro {
+            background: #2c3e50;
+        }
+
+        .section-title.background {
+            background: #2980b9;
+        }
+
+        .section-title.solarwinds {
+            background: #f39c12;
+        }
+
+        .section-title.colonial {
+            background: #c0392b;
+        }
+
+        .section-title.comparison {
+            background: #8e44ad;
+        }
+
+        .section-title.lessons {
+            background: #16a085;
+        }
+
+        .section-title.conclusion {
+            background: #1a3a5c;
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        .content-text {
+            margin-bottom: 25px;
+        }
+
+        .content-text p {
+            font-size: 1.05rem;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .content-text p strong {
+            color: #1a3a5c;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #2980b9;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .card p, .card ul {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .card ul li {
+            margin-bottom: 8px;
+        }
+
+        .card .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .card.solarwinds-card {
+            border-left-color: #f39c12;
+        }
+
+        .card.colonial-card {
+            border-left-color: #c0392b;
+        }
+
+        .card.comparison-card {
+            border-left-color: #8e44ad;
+        }
+
+        .card.lesson-card {
+            border-left-color: #16a085;
+        }
+
+        .figure-ref {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 12px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .figure-ref strong {
+            color: #2c3e50;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .stat-card.solarwinds-stat {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .stat-card.colonial-stat {
+            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+        }
+
+        .stat-card.green-stat {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #f39c12, #e67e22);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 35px;
+            padding-left: 30px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -35px;
+            top: 0;
+            width: 45px;
+            height: 45px;
+            background: #f39c12;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 0 0 5px rgba(243, 156, 18, 0.2);
+        }
+
+        .timeline-marker.colonial-marker {
+            background: #c0392b;
+            box-shadow: 0 0 0 5px rgba(192, 57, 43, 0.2);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #f39c12;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-date.colonial-date {
+            color: #c0392b;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .timeline-desc {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .timeline-desc strong {
+            color: #2c3e50;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: #2c3e50;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .comparison-table .solarwinds-row td:first-child {
+            border-left: 3px solid #f39c12;
+        }
+
+        .comparison-table .colonial-row td:first-child {
+            border-left: 3px solid #c0392b;
+        }
+
+        .ai-insight {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #a5d6a7;
+        }
+
+        .ai-insight h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .ai-insight p {
+            color: #333;
+        }
+
+        .ai-insight .ai-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .risk-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .risk-critical {
+            background: #c0392b;
+            color: white;
+        }
+
+        .risk-high {
+            background: #e67e22;
+            color: white;
+        }
+
+        .risk-medium {
+            background: #f39c12;
+            color: white;
+        }
+
+        .risk-low {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #1a1a2e;
+            color: white;
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .footer .footer-name {
+            font-size: 1rem;
+            font-weight: bold;
+            opacity: 1;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+                padding: 15px 20px;
+            }
+            .section-content {
+                padding: 20px;
+            }
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .student-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .timeline {
+                padding-left: 20px;
+            }
+            .timeline-marker {
+                width: 35px;
+                height: 35px;
+                left: -25px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+            .section:hover {
+                transform: none;
+            }
+            .header {
+                background: #1a3a5c !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .stat-card {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .section-title {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .comparison-table th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .timeline-marker {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .ai-insight {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>Risk, Crisis and <span>Security Management</span></h1>
+        <div class="subtitle">Comparative Analysis: SolarWinds Supply Chain Attack vs Colonial Pipeline Ransomware Attack</div>
+        <div class="student-info">
+            <span><strong>Student Name:</strong> Bijay Kumar Yadav</span>
+            <span><strong>London Met ID:</strong> 24046367</span>
+            <span><strong>College ID:</strong> NP01NT4A240108</span>
+            <span><strong>Module:</strong> CC5052NI Risk, Crisis and Security Management</span>
+        </div>
+        <div class="meta">
+            <span class="badge solarwinds">🌞 SolarWinds Attack</span>
+            <span class="badge colonial">🛢️ Colonial Pipeline Attack</span>
+            <span class="badge highlight">50% Individual Coursework</span>
+            <span class="badge">Autumn Semester 2025</span>
+        </div>
+    </div>
+
+    <!-- Abstract Section -->
+    <div class="section">
+        <div class="section-title intro">
+            📄 Abstract
+        </div>
+        <div class="section-content">
+            <div class="content-text">
+                <p>The SolarWinds supply chain attack, and the Colonial Pipeline ransomware attack are two major cyber incidents that are examined in this report through a depth analysis of cybersecurity risk management. The study used an analytical framework to investigate how these possible breaches occurred and developed due to error at across key stage of risk management lifecycle including <strong>risk identification, risk assessment and risk control</strong>.</p>
+            </div>
+            <div class="content-text">
+                <p>To determine where security measures failed, the analysis is based on standard information security guidelines like <strong>CIA triad</strong> (Confidentiality, Integrity and Availability) and vulnerability management procedures. Threat actors managed to disrupt reliable software update and execute for constant illegal activities in the SolarWinds case studies due to serious weakness in the third-party risk assessment and software accuracy validation. The investigations show issues in a colonial pipeline network division for incident response ability and access control systems.</p>
+            </div>
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Key Insight</h4>
+                <p>Both incidents represent a fundamental shift in cyber risk management. The SolarWinds attack demonstrated that <strong>supply chain trust is a critical vulnerability</strong>, while Colonial Pipeline showed that <strong>operational technology (OT) security</strong> cannot be separated from IT security. Together, they highlight the need for <strong>Zero-Trust architecture</strong> and <strong>comprehensive incident response planning</strong> in modern organizations.</p>
+            </div>
+            <div class="content-text">
+                <p>By using a comparison method, the analysis identifies systemic weakness across both incidents particularly lacking supply chain control, path management and log detective. The finding shows that these breaches represent serious short coming in organizations risk management and planning control implementation. To implement <strong>zero trust security models</strong>, establishing strong vulnerability management strategies, improving third-party risk structure and creating complete disaster recovery plans and business continuity plans are just conclusion to increase cybersecurity flexibility.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Rationale and Objectives -->
+    <div class="section">
+        <div class="section-title intro" style="background: #34495e;">
+            🎯 2. Rationale and Objectives
+        </div>
+        <div class="section-content">
+            <div class="grid-2">
+                <div class="card" style="border-left-color: #2980b9;">
+                    <h4>📌 Rationale</h4>
+                    <p>Risk management or risk control acts as it crucial significant in the current time. Effective risk management is a vital for organisational continued survival as cyber threats become more complicated and expensive. Failure of risk identification, risk assessment and risk control can result in serious incidents.</p>
+                </div>
+                <div class="card" style="border-left-color: #8e44ad;">
+                    <h4>🎯 Objectives</h4>
+                    <ul>
+                        <li>To investigate systematic failures in risk management</li>
+                        <li>To apply conceptual structures to real world incidents</li>
+                        <li>To determine common cyber risk governance vulnerabilities</li>
+                        <li>To develop practical ideas for growing strength</li>
+                        <li>To show the strategically value for active risk management</li>
+                        <li>To implement Zero-Trust security architecture</li>
+                        <li>To strengthen third-party risk processes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Literature Review -->
+    <div class="section">
+        <div class="section-title background">
+            📚 3. Literature Review
+        </div>
+        <div class="section-content">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">3.1 Risk Management</h3>
+            <div class="content-text">
+                <p>Risk management is a continuous evolving procedure that is necessary to organisational stability instead of liner task. According to <strong>ISO 310000 (2018)</strong>, it is explained that coordinated activities to guide and manage an entity with regarding to risk. The process of systematic categorization into three stages in cybersecurity including <strong>risk identification, risk assessment and risk control</strong>. This develops an ever-changing lifecycle that need to be regular review and adjusted on a regular basis. (Michael E. Whitman, 2017)</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card" style="border-left-color: #3498db;">
+                    <h4>🔍 3.1.1 Risk Identification</h4>
+                    <p>At this stage, any possible risk that could negatively impact the worldwide organizations objectives, projects or all assets are carefully sought out. Risks can originate from internal vulnerabilities or weaknesses, external threats, market charts or unanticipated events. (Roller, 2025)</p>
+                    <span class="risk-level risk-high">HIGH</span>
+                </div>
+                <div class="card" style="border-left-color: #8e44ad;">
+                    <h4>📊 3.1.2 Risk Assessment</h4>
+                    <p>For risk assessment, each one is examined to determine its impacts and likelihood of occurrence, and the magnitude of its impacts would it do. This includes both <strong>Quantitative Risk Analysis</strong> (numeric values, financial view) and <strong>Qualitative Risk Analysis</strong> (judgement from experts, scenario-based assessment).</p>
+                    <span class="risk-level risk-critical">CRITICAL</span>
+                </div>
+                <div class="card" style="border-left-color: #e67e22;">
+                    <h4>🛡️ 3.1.3 Risk Control</h4>
+                    <ul>
+                        <li><strong>Avoidance:</strong> Eliminating the threat by changing plans</li>
+                        <li><strong>Transference:</strong> Shifting accountability to third party</li>
+                        <li><strong>Mitigation:</strong> Implementing safeguards to reduce probability/impact</li>
+                        <li><strong>Acceptance:</strong> Retaining risk after cost-benefit analysis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Analysis: Risk Management Gaps</h4>
+                <p>Both the SolarWinds and Colonial Pipeline incidents demonstrate failures across all three stages of risk management. In <strong>SolarWinds</strong>, risk identification failed to recognize supply chain vulnerabilities, risk assessment did not evaluate the impact of software compromise, and risk controls (code signing, monitoring) were insufficient. In <strong>Colonial Pipeline</strong>, risk identification missed VPN and MFA weaknesses, risk assessment underestimated ransomware impact on critical infrastructure, and risk controls (backup, segmentation) were inadequate.</p>
+            </div>
+
+            <h3 style="color: #2c3e50; margin: 25px 0 15px 0;">3.2 CIA Triad</h3>
+            <div class="grid-3">
+                <div class="card" style="border-left-color: #3498db;">
+                    <h4>🔒 Confidentiality</h4>
+                    <p>Ensures that sensitive data is only accessible to those who can specifically authorized through preventing unauthorized disclosure. This security fundamental is about confidentiality and privacy from any kind of threats to personal identifiers from falling into the wrong hands.</p>
+                </div>
+                <div class="card" style="border-left-color: #2ecc71;">
+                    <h4>✅ Integrity</h4>
+                    <p>The idea of protecting sensitive data's accuracy, reliability and consistency over every step of its entire lifecycle. When preventing any kind of alter, change or modification. This component is need for ensuring the data can be accepted for making decisions.</p>
+                </div>
+                <div class="card" style="border-left-color: #e67e22;">
+                    <h4>📡 Availability</h4>
+                    <p>The connection between security and operating function called availability, which that information and data system are every time available when needs to authorized users at right time. Redundancy and fault tolerance techniques are used to protect availability.</p>
+                </div>
+            </div>
+
+            <div class="figure-ref">
+                <strong>📊 Figure 1:</strong> Column Chart in Cyber Risk Management Market Growth (Dimarket, 2025)<br>
+                <strong>📊 Figure 2:</strong> Risk Management Components (Michael E. Whitman, 2017)<br>
+                <strong>📊 Figure 3-5:</strong> Risk Identification Process, Risk Assessment, Quantitative Risk Analysis
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: SolarWinds Case Study -->
+    <div class="section">
+        <div class="section-title solarwinds">
+            🌞 4.1 Case Study 01: SolarWinds Supply Chain Attack
+        </div>
+        <div class="section-content">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">4.1.1 Background</h3>
+            <div class="content-text">
+                <p><strong>SolarWinds</strong> is a popular American IT technology company that aims on software for IT management and monitoring. It was established in <strong>1999</strong> and has its corporate headquarters in <strong>Austin, Texas</strong>. It has assisted organizations in effectively manage their systems, network configurations, apps and IT infrastructures.</p>
+            </div>
+            <div class="content-text">
+                <p>The SolarWinds hack was serious because it applies off a much bigger supply chain event that impacted <strong>18,000+ organizations</strong> including US government agencies compared to other single company was hacked through SolarWinds.</p>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-card solarwinds-stat">
+                    <div class="stat-number">18,000+</div>
+                    <div class="stat-label">Organizations Affected</div>
+                </div>
+                <div class="stat-card solarwinds-stat">
+                    <div class="stat-number">8-9</div>
+                    <div class="stat-label">Months Undetected</div>
+                </div>
+                <div class="stat-card solarwinds-stat">
+                    <div class="stat-number">$90M+</div>
+                    <div class="stat-label">Response Cost</div>
+                </div>
+                <div class="stat-card solarwinds-stat">
+                    <div class="stat-number">44%</div>
+                    <div class="stat-label">Government Agency Victims</div>
+                </div>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Deep Dive: SolarWinds Attack Significance</h4>
+                <p>The SolarWinds attack represents a <strong>paradigm shift in cybersecurity</strong>. Unlike traditional attacks that target a single organization, this was a <strong>supply chain compromise</strong> that leveraged the trust relationship between SolarWinds and its 300,000+ customers. The attackers, identified as <strong>Russian state-sponsored APT29 (Cozy Bear)</strong>, demonstrated unprecedented sophistication in:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>Gaining access to SolarWinds' build environment</li>
+                    <li>Inserting backdoor code (SUNBURST) into legitimate updates</li>
+                    <li>Digitally signing malware with SolarWinds' valid certificate</li>
+                    <li>Remaining undetected for 8-9 months</li>
+                    <li>Selectively targeting high-value government and tech organizations</li>
+                </ul>
+            </div>
+
+            <h3 style="color: #2c3e50; margin: 25px 0 15px 0;">4.1.2 SolarWinds Attack Timeline</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-date">1999</div>
+                    <div class="timeline-title">Company Origin</div>
+                    <div class="timeline-desc">SolarWinds was established in Austin, Texas, focusing on cost-effective IT monitoring tools for system and network infrastructures.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-date">2010</div>
+                    <div class="timeline-title">Orion Platform Launch</div>
+                    <div class="timeline-desc">SolarWinds introduced the Orion platform as the foundation for its monitoring products. Following its IPO, the company gained worldwide recognition.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-date">September 2019</div>
+                    <div class="timeline-title">Initial Reconnaissance</div>
+                    <div class="timeline-desc">Attackers began probing SolarWinds' networks, scanning for open ports, testing credential policies, and identifying key personnel with privileged access.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-date">October 2019</div>
+                    <div class="timeline-title">Malware Introduced (SUNBURST)</div>
+                    <div class="timeline-desc">Attackers inserted the first known malicious code into the Orion software development environment. This backdoor became known as <strong>SUNBURST (Solorigate)</strong>.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">5</div>
+                    <div class="timeline-date">March 2020</div>
+                    <div class="timeline-title">Malicious Update Released</div>
+                    <div class="timeline-desc">The first trojanized SolarWinds Orion update (version 2019.4) was released to users. The update was digitally signed with SolarWinds' official certificate.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">6</div>
+                    <div class="timeline-date">June – September 2020</div>
+                    <div class="timeline-title">Supply Chain Attack Propagation</div>
+                    <div class="timeline-desc">Thousands of companies worldwide received the malicious updates. The attack spread rapidly across government agencies, technology companies, and critical infrastructure.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">7</div>
+                    <div class="timeline-date">November 2020</div>
+                    <div class="timeline-title">Attack Discovered</div>
+                    <div class="timeline-desc">FireEye observed unusual activity on its own network and identified the SolarWinds Orion update as the source of the compromise.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">8</div>
+                    <div class="timeline-date">December 2020</div>
+                    <div class="timeline-title">Public Disclosure</div>
+                    <div class="timeline-desc">SolarWinds publicly disclosed the breach. CISA issued Emergency Directive 21-01 requiring all federal agencies to disconnect SolarWinds Orion products.</div>
+                </div>
+            </div>
+
+            <div class="figure-ref">
+                <strong>📊 Figures 11-17:</strong> SolarWinds Orion Platform dashboard, Victims by sector charts, Digital signatures information, Attack timeline, FireEye tactics, Company origin figures
+            </div>
+
+            <h3 style="color: #2c3e50; margin: 25px 0 15px 0;">4.1.3 Issues Identifications - Risk Management Failures</h3>
+            <div class="grid-2">
+                <div class="card solarwinds-card">
+                    <h4>🔐 Issue 1: Identity and Access Management Failures</h4>
+                    <ul>
+                        <li>Weak password policies - insufficient complexity requirements</li>
+                        <li>Lack of authority separation - no segregation of duties</li>
+                        <li>Insufficient supervision of privileged accounts</li>
+                        <li>No Multi-Factor Authentication (MFA) on critical systems</li>
+                    </ul>
+                    <p><strong>Impact:</strong> Attackers moved laterally without triggering alarms</p>
+                    <span class="risk-level risk-high">Risk Level: HIGH</span>
+                </div>
+                <div class="card solarwinds-card">
+                    <h4>📊 Issue 2: Insufficient Risk Monitoring</h4>
+                    <ul>
+                        <li>No threat data integration across systems</li>
+                        <li>No anomaly detection mechanisms</li>
+                        <li>Incomplete logging coverage and delayed alerts</li>
+                        <li>No Security Information and Event Management (SIEM)</li>
+                    </ul>
+                    <p><strong>Impact:</strong> 8-9 months dwell time allowed extensive damage</p>
+                    <span class="risk-level risk-critical">Risk Level: CRITICAL</span>
+                </div>
+                <div class="card solarwinds-card">
+                    <h4>🔏 Issue 3: Inadequate Software Verification</h4>
+                    <ul>
+                        <li>Implicit trust in digital signatures</li>
+                        <li>No sandbox testing of updates</li>
+                        <li>No behavioral analysis of update binaries</li>
+                        <li>No Software Bill of Materials (SBOM)</li>
+                    </ul>
+                    <p><strong>Impact:</strong> Malicious updates were trusted and deployed</p>
+                    <span class="risk-level risk-critical">Risk Level: CRITICAL</span>
+                </div>
+                <div class="card solarwinds-card">
+                    <h4>🛡️ Issue 4: Lack of Zero-Trust System</h4>
+                    <ul>
+                        <li>No continuous verification of users and systems</li>
+                        <li>No micro-segmentation of networks</li>
+                        <li>No least privilege enforcement</li>
+                        <li>No real-time monitoring of anomalous traffic</li>
+                    </ul>
+                    <p><strong>Impact:</strong> Implicit trust model enabled widespread compromise</p>
+                    <span class="risk-level risk-critical">Risk Level: CRITICAL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Colonial Pipeline Case Study -->
+    <div class="section">
+        <div class="section-title colonial">
+            🛢️ 4.2 Case Study 02: The Colonial Pipeline Ransomware Attack
+        </div>
+        <div class="section-content">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">4.2.1 Background</h3>
+            <div class="content-text">
+                <p>The colonial pipeline company was founded in <strong>1961</strong> and acts construction started beginning in 1962. It was Alpharetta, Georgia pipeline company headquartered in USA. More than <strong>100 million tons</strong> of gasoline, diesel, jet fuel, plane fuel and other refined fuel are transported daily basis and communicate and business market the southeast and east coast by colonial pipeline.</p>
+            </div>
+            <div class="content-text">
+                <p>The country largest transport network for petroleum-based products, which stretches over <strong>5,500 miles</strong> from the city of Houston, Texas to the part of the New York and New Jersey. This massive network provides almost <strong>45%</strong> of the petroleum used on the east coast, making it an essential component of the US energy infrastructure.</p>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-card colonial-stat">
+                    <div class="stat-number">5,500</div>
+                    <div class="stat-label">Miles of Pipeline</div>
+                </div>
+                <div class="stat-card colonial-stat">
+                    <div class="stat-number">45%</div>
+                    <div class="stat-label">East Coast Fuel Supply</div>
+                </div>
+                <div class="stat-card colonial-stat">
+                    <div class="stat-number">$4.4M</div>
+                    <div class="stat-label">Ransom Paid (75 Bitcoin)</div>
+                </div>
+                <div class="stat-card colonial-stat">
+                    <div class="stat-number">100GB</div>
+                    <div class="stat-label">Data Exfiltrated</div>
+                </div>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Deep Dive: Colonial Pipeline Significance</h4>
+                <p>The Colonial Pipeline attack was a <strong>wake-up call for critical infrastructure security</strong>. It demonstrated that ransomware attacks can have <strong>physical, real-world consequences</strong> beyond data loss. The attack highlighted several critical failures:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>VPN Security Gap:</strong> The attacker used a single compromised VPN password with no MFA</li>
+                    <li><strong>Network Segmentation Failure:</strong> The attacker moved from IT to OT (operational technology) systems</li>
+                    <li><strong>Inadequate Incident Response:</strong> The company shut down the entire pipeline proactively</li>
+                    <li><strong>Economic Impact:</strong> Fuel shortages, price spikes, and emergency declarations</li>
+                </ul>
+            </div>
+
+            <h3 style="color: #2c3e50; margin: 25px 0 15px 0;">4.2.2 Colonial Pipeline Attack Timeline</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker colonial-marker">1</div>
+                    <div class="timeline-date colonial-date">6 May 2021</div>
+                    <div class="timeline-title">First Compromise</div>
+                    <div class="timeline-desc">Attackers entered Colonial Pipeline's network without MFA, stole data, and deployed ransomware. The VPN account used was inactive but still active, with a compromised password.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker colonial-marker">2</div>
+                    <div class="timeline-date colonial-date">7 May 2021</div>
+                    <div class="timeline-title">Ransomware Triggered</div>
+                    <div class="timeline-desc">An employee found a ransomware note declaring DarkSide ransomware. The company brought in cyber experts and shut down the entire pipeline network.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker colonial-marker">3</div>
+                    <div class="timeline-date colonial-date">7 May 2021</div>
+                    <div class="timeline-title">Ransom Paid</div>
+                    <div class="timeline-desc">Colonial Pipeline paid approximately <strong>75 bitcoins ($4.4 million)</strong> to the DarkSide hacker group in a matter of hours to get decrypting tools.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker colonial-marker">4</div>
+                    <div class="timeline-date colonial-date">8-9 May 2021</div>
+                    <div class="timeline-title">Public Declarations</div>
+                    <div class="timeline-desc">The company made a public announcement. U.S. President Joe Biden declared a <strong>national state of emergency</strong> to speed up relief efforts.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker colonial-marker">5</div>
+                    <div class="timeline-date colonial-date">10-11 May 2021</div>
+                    <div class="timeline-title">FBI Investigation</div>
+                    <div class="timeline-desc">The FBI identified the cybercriminal group <strong>DarkSide</strong> as responsible party. The FBI seized criminal proceeds from a bitcoin wallet.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker colonial-marker">6</div>
+                    <div class="timeline-date colonial-date">12 May 2021</div>
+                    <div class="timeline-title">Pipeline Restarted</div>
+                    <div class="timeline-desc">Fuel products transport restarted after some days offline but took more time for normal conditions to resume.</div>
+                </div>
+            </div>
+
+            <div class="figure-ref">
+                <strong>📊 Figures 20-25:</strong> Colonial Pipeline Transport map, Ransomware Attack Message, Darkside Group Information, Phishing Gmail page, Sensitive data leaking, FBI Investigation
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Comparison -->
+    <div class="section">
+        <div class="section-title comparison">
+            📊 5. Comparison Between SolarWinds and Colonial Pipeline Attacks
+        </div>
+        <div class="section-content">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspects</th>
+                        <th>SolarWinds Attack</th>
+                        <th>Colonial Pipeline Attack</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="solarwinds-row">
+                        <td><strong>Type</strong></td>
+                        <td>Supply Chain Attack / Cyber Espionage</td>
+                        <td>Ransomware Attack</td>
+                    </tr>
+                    <tr class="colonial-row">
+                        <td><strong>Threat Actor</strong></td>
+                        <td>Russian SVR / APT29 (Cozy Bear)</td>
+                        <td>DarkSide (Criminal Ransomware Group)</td>
+                    </tr>
+                    <tr class="solarwinds-row">
+                        <td><strong>Motivation</strong></td>
+                        <td>Collect sensitive information, intelligence gathering</td>
+                        <td>Financial profit through ransom demands</td>
+                    </tr>
+                    <tr class="colonial-row">
+                        <td><strong>Vector</strong></td>
+                        <td>Software supply chain through third-party updates</td>
+                        <td>Compromised VPN password, no MFA</td>
+                    </tr>
+                    <tr class="solarwinds-row">
+                        <td><strong>Delivery</strong></td>
+                        <td>SolarWinds Orion update with SUNBURST backdoor</td>
+                        <td>Phishing attempt to steal VPN credentials</td>
+                    </tr>
+                    <tr class="colonial-row">
+                        <td><strong>Malware Type</strong></td>
+                        <td>Backdoor (SUNBURST / Solorigate)</td>
+                        <td>DarkSide Ransomware</td>
+                    </tr>
+                    <tr class="solarwinds-row">
+                        <td><strong>Financial Impact</strong></td>
+                        <td>Billions in mitigation cost, $90M+ response cost</td>
+                        <td>$4.4 million ransom + recovery costs</td>
+                    </tr>
+                    <tr class="colonial-row">
+                        <td><strong>Bypass Method</strong></td>
+                        <td>Update process on certification, digital signatures</td>
+                        <td>VPN authentication and network infrastructure</td>
+                    </tr>
+                    <tr class="solarwinds-row">
+                        <td><strong>Scale</strong></td>
+                        <td>18,000+ organizations, 9 US agencies</td>
+                        <td>1 company, 45% of east coast fuel supply</td>
+                    </tr>
+                    <tr class="colonial-row">
+                        <td><strong>Detection Time</strong></td>
+                        <td>8-9 months (FireEye discovered)</td>
+                        <td>Immediate (ransomware note appeared)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Comparative Analysis</h4>
+                <p>The two incidents represent <strong>different but equally dangerous threat vectors</strong>. SolarWinds demonstrates the danger of <strong>state-sponsored supply chain attacks</strong> that can compromise thousands of organizations simultaneously with sophisticated, stealthy techniques. Colonial Pipeline shows the danger of <strong>criminal ransomware attacks</strong> on critical infrastructure that can cause immediate operational and societal disruption. Both highlight the need for:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Zero-Trust Architecture</strong> - Never trust, always verify</li>
+                    <li><strong>Multi-Factor Authentication</strong> - Essential for all access</li>
+                    <li><strong>Incident Response Planning</strong> - Proactive preparation</li>
+                    <li><strong>Supply Chain Security</strong> - Verify all third-party components</li>
+                    <li><strong>Backup and Recovery</strong> - Critical for ransomware resilience</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Lessons Learned -->
+    <div class="section">
+        <div class="section-title lessons">
+            📖 6. Lesson Learned from Both Case Studies
+        </div>
+        <div class="section-content">
+            <div class="grid-2">
+                <div class="card lesson-card">
+                    <h4>1. Zero-Trust Architecture</h4>
+                    <p>These incidents highlighted the outdated traditional trust models. Attackers in SolarWinds used malicious code on backdoor to gain access to networks by taking advantage of real software updates. Colonial Pipeline's initial access was through a misused VPN account without MFA.</p>
+                    <p><strong>Solution:</strong> "Never trust, always verify" - continuous authentication, micro-segmentation, least privilege access.</p>
+                    <span class="risk-level risk-critical">CRITICAL</span>
+                </div>
+                <div class="card lesson-card">
+                    <h4>2. Third-Party Risk Management</h4>
+                    <p>SolarWinds highlighted how vulnerable supply chain can make trust supply chain software an important risk vector. Instructions must be followed as to understanding and keep tracking of relationships using <strong>SBOM tools (Software Bill of Materials)</strong>.</p>
+                    <p><strong>Solution:</strong> Continuous vendor security assessment, SBOM tracking, supplier security reporting.</p>
+                    <span class="risk-level risk-critical">CRITICAL</span>
+                </div>
+                <div class="card lesson-card">
+                    <h4>3. Monitoring, Detection and Incident Response</h4>
+                    <p>There were gaps in detection and incident response capabilities in both cases. SolarWinds remained unknown for many months demonstrating monitoring blind spots.</p>
+                    <p><strong>Solution:</strong> Robust incident response and monitoring (SIEM/EDR) teams that can identify irregularities early.</p>
+                    <span class="risk-level risk-high">HIGH</span>
+                </div>
+                <div class="card lesson-card">
+                    <h4>4. Backup and Recovery</h4>
+                    <p>Colonial Pipeline and other related ransomware incidents put the company's ability to restore data at risk. It has avoided encryptions during an attack make backup enable on systems.</p>
+                    <p><strong>Solution:</strong> Regular backups, offline backup storage, network segmentation, tested disaster recovery plans.</p>
+                    <span class="risk-level risk-high">HIGH</span>
+                </div>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Summary: Key Takeaways</h4>
+                <p>The SolarWinds and Colonial Pipeline incidents represent <strong>two sides of the same coin</strong> in modern cybersecurity threats. While their tactics and motivations differ, the underlying lessons are consistent:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Trust must be verified</strong> - Zero-Trust is no longer optional</li>
+                    <li><strong>Identity is the new perimeter</strong> - Strong authentication is essential</li>
+                    <li><strong>Preparation prevents panic</strong> - Incident response plans must be tested</li>
+                    <li><strong>Supply chain is a security boundary</strong> - Third-party risk must be managed</li>
+                    <li><strong>Resilience matters</strong> - Backup and recovery are critical</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Conclusion -->
+    <div class="section">
+        <div class="section-title conclusion">
+            📝 7. Conclusion
+        </div>
+        <div class="section-content">
+            <div class="content-text">
+                <p>One of the biggest and most sophisticated cyberattacks in history, the <strong>SolarWinds attack</strong> highlighted how hackers can continuously compromise thousands of organizations such as U.S government agencies, educational institutions, IT company and others by taking advantage of the supply chain attack. Attacker have gained unnoticed access to network of U.S government, large IT company entries by stealing SolarWinds development and introduced a <strong>SUNBURST</strong> backdoor into Orion software update. <strong>Trust must be verified first.</strong></p>
+            </div>
+            <div class="content-text">
+                <p>The <strong>Colonial Pipeline incident</strong> was significant ransomware attack with quick operational societal effect. Colonial Pipeline, a network that delivers almost half of the fuel on the east coast had to half pipeline operations after hackers associated with the DarkSide group ransomware. The attackers encrypted all device portions of the company IT system. The inability to handle billing system and other IT system forced the shutdown. To get back access Colonial had to pay ransom of approximately <strong>75 bitcoins or $4.4 million</strong>. To implement strong VPN password with MFA, tested incident response plans and backups system are essential.</p>
+            </div>
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Final Analysis</h4>
+                <p>Both incidents demonstrate that <strong>cybersecurity is not just an IT issue but a business and societal imperative</strong>. The SolarWinds attack showed that <strong>supply chain trust is a critical vulnerability</strong> that can be exploited at scale by sophisticated state actors. The Colonial Pipeline attack showed that <strong>cyber threats can have physical, real-world consequences</strong> that affect millions of people. Organizations must adopt a <strong>comprehensive, layered security approach</strong> that includes Zero-Trust architecture, strong identity management, continuous monitoring, incident response planning, and regular testing.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p class="footer-name"><strong>Risk, Crisis and Security Management - Comparative Analysis</strong></p>
+        <p>CC5052NI | Bijay Kumar Yadav</p>
+        <p>London Met ID: 24046367 | College ID: NP01NT4A240108</p>
+        <p style="margin-top: 10px;">References: Michael E. Whitman (2017), Stedman (2025), Roller (2025), Hayes (2025), Fortinet (2025), Baker (2021), Carson (2021), Adebayo (2022), INSURICA (n.d.), Washington (2021)</p>
+        <p style="margin-top: 10px; font-size: 0.7rem; opacity: 0.5;">© 2025 Bijay Kumar Yadav | All Rights Reserved</p>
+    </div>
+</div>
+</body>
+</html>

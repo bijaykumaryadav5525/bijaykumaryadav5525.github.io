@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shai-Hulud npm Worm - Supply Chain Attack Case Study | Bijay Kumar Yadav</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header h1 span {
+            color: #e74c3c;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .header .meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header .meta .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+
+        .header .meta .badge.highlight {
+            background: #e74c3c;
+        }
+
+        .header .meta .badge.orange {
+            background: #e67e22;
+        }
+
+        .header .meta .badge.green {
+            background: #2ecc71;
+        }
+
+        .header .meta .badge.purple {
+            background: #8e44ad;
+        }
+
+        .student-info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .student-info span {
+            opacity: 0.9;
+        }
+
+        .student-info strong {
+            color: #fff;
+        }
+
+        .section {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            padding: 20px 30px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .section-title.executive {
+            background: #2c3e50;
+        }
+
+        .section-title.intro {
+            background: #2980b9;
+        }
+
+        .section-title.background {
+            background: #8e44ad;
+        }
+
+        .section-title.attack {
+            background: #c0392b;
+        }
+
+        .section-title.impact {
+            background: #e67e22;
+        }
+
+        .section-title.response {
+            background: #16a085;
+        }
+
+        .section-title.mitigation {
+            background: #2ecc71;
+        }
+
+        .section-title.conclusion {
+            background: #1a3a5c;
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        .content-text {
+            margin-bottom: 25px;
+        }
+
+        .content-text p {
+            font-size: 1.05rem;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .content-text p strong {
+            color: #1a3a5c;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #2980b9;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .card p, .card ul {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .card ul li {
+            margin-bottom: 8px;
+        }
+
+        .card .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .card.attack-card {
+            border-left-color: #c0392b;
+        }
+
+        .card.impact-card {
+            border-left-color: #e67e22;
+        }
+
+        .card.response-card {
+            border-left-color: #16a085;
+        }
+
+        .card.mitigation-card {
+            border-left-color: #2ecc71;
+        }
+
+        .figure-ref {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 12px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .figure-ref strong {
+            color: #2c3e50;
+        }
+
+        .code-block {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .code-block .highlight {
+            color: #e74c3c;
+        }
+
+        .code-block .comment {
+            color: #7f8c8d;
+        }
+
+        .code-block .keyword {
+            color: #f39c12;
+        }
+
+        .code-block .string {
+            color: #2ecc71;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .stat-card.red-stat {
+            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+        }
+
+        .stat-card.green-stat {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        }
+
+        .stat-card.orange-stat {
+            background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+        }
+
+        .stat-card.purple-stat {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+        }
+
+        .stat-card.blue-stat {
+            background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+        }
+
+        .ai-insight {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #a5d6a7;
+        }
+
+        .ai-insight h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .ai-insight p {
+            color: #333;
+        }
+
+        .ai-insight .ai-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .attack-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .attack-table th {
+            background: #2c3e50;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .attack-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .attack-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .attack-table .stage-row td:first-child {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .risk-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .risk-critical {
+            background: #c0392b;
+            color: white;
+        }
+
+        .risk-high {
+            background: #e67e22;
+            color: white;
+        }
+
+        .risk-medium {
+            background: #f39c12;
+            color: white;
+        }
+
+        .risk-low {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #1a1a2e;
+            color: white;
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .footer .footer-name {
+            font-size: 1rem;
+            font-weight: bold;
+            opacity: 1;
+            color: #fff;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #c0392b, #e74c3c);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 35px;
+            padding-left: 30px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -35px;
+            top: 0;
+            width: 45px;
+            height: 45px;
+            background: #c0392b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 0 0 5px rgba(192, 57, 43, 0.2);
+        }
+
+        .timeline-marker.green-marker {
+            background: #2ecc71;
+            box-shadow: 0 0 0 5px rgba(46, 204, 113, 0.2);
+        }
+
+        .timeline-marker.purple-marker {
+            background: #8e44ad;
+            box-shadow: 0 0 0 5px rgba(142, 68, 173, 0.2);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #c0392b;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .timeline-desc {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .timeline-desc strong {
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+                padding: 15px 20px;
+            }
+            .section-content {
+                padding: 20px;
+            }
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .student-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .timeline {
+                padding-left: 20px;
+            }
+            .timeline-marker {
+                width: 35px;
+                height: 35px;
+                left: -25px;
+                font-size: 0.9rem;
+            }
+            .attack-table {
+                font-size: 0.8rem;
+            }
+            .attack-table th, .attack-table td {
+                padding: 8px 10px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+            .section:hover {
+                transform: none;
+            }
+            .header {
+                background: #1a3a5c !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .stat-card {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .section-title {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .attack-table th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .timeline-marker {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .ai-insight {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>Shai-Hulud <span>npm Worm</span></h1>
+        <div class="subtitle">Self-Replicating Software Supply Chain Attack - Cybersecurity Case Study</div>
+        <div class="student-info">
+            <span><strong>Student Name:</strong> Bijay Kumar Yadav</span>
+            <span><strong>London Met ID:</strong> 24046367</span>
+            <span><strong>College ID:</strong> NP01NT4A240108</span>
+            <span><strong>Module:</strong> Cyber Security in Computing</span>
+        </div>
+        <div class="meta">
+            <span class="badge highlight">🐛 Self-Replicating Worm</span>
+            <span class="badge orange">📦 npm Supply Chain</span>
+            <span class="badge purple">🔄 Credential Theft</span>
+            <span class="badge green">🔍 TruffleHog</span>
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="section">
+        <div class="section-title executive">
+            📄 1. Executive Summary
+        </div>
+        <div class="section-content">
+            <div class="content-text">
+                <p><strong>Shai-Hulud</strong> was a self-replicating software supply-chain worm discovered in the <strong>npm ecosystem in September 2025</strong>. ReversingLabs first detected the cascading compromise on <strong>15 September 2025</strong>, while the first known compromised package, <strong>rxt-authentication version 0.0.3</strong>, had been published on <strong>14 September at 17:58:50 UTC</strong>. The incident was notable because it combined malicious package injection, automatic propagation, credential theft and exposure of private development resources within one attack chain. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+            <div class="content-text">
+                <p>Unlike conventional malware that primarily spreads from one endpoint to another, Shai-Hulud used the <strong>software-development ecosystem as its propagation medium</strong>. A compromised npm maintainer account could be used to publish infected versions of other packages controlled by the same account. When developers or build systems installed an infected package, an npm <strong>postinstall lifecycle script</strong> executed a malicious <strong>bundle.js payload</strong>. The payload searched for high-value credentials and secrets, including npm, GitHub, AWS and GCP tokens, and used <strong>TruffleHog</strong> to broaden secret discovery. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Executive Overview</h4>
+                <p>Shai-Hulud represents a <strong>new generation of supply chain threats</strong> that leverages the trust relationships in software development:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Self-Propagating:</strong> Uses compromised accounts to spread automatically</li>
+                    <li><strong>Multi-Platform:</strong> Targets npm, GitHub, AWS, and GCP credentials</li>
+                    <li><strong>Persistent:</strong> Stolen credentials enable continued access even after malware removal</li>
+                    <li><strong>Scale:</strong> Hundreds of packages compromised within days</li>
+                    <li><strong>Sophisticated:</strong> Uses legitimate tools (TruffleHog) for malicious purposes</li>
+                </ul>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-card red-stat">
+                    <div class="stat-number">15 Sept</div>
+                    <div class="stat-label">2025 - Discovery Date</div>
+                </div>
+                <div class="stat-card red-stat">
+                    <div class="stat-number">0.0.3</div>
+                    <div class="stat-label">First Compromised Version</div>
+                </div>
+                <div class="stat-card red-stat">
+                    <div class="stat-number">3MB+</div>
+                    <div class="stat-label">Malicious bundle.js Size</div>
+                </div>
+                <div class="stat-card red-stat">
+                    <div class="stat-number">800+</div>
+                    <div class="stat-label">Secret Types Detected by TruffleHog</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: Introduction -->
+    <div class="section">
+        <div class="section-title intro">
+            📚 2. Introduction
+        </div>
+        <div class="section-content">
+            <div class="content-text">
+                <p>Modern software development depends heavily on <strong>open-source components</strong>. JavaScript applications commonly use npm packages directly and indirectly through transitive dependencies. This model allows developers to build applications quickly, but it also creates a large <strong>trust network</strong> in which a compromised package may execute code inside many unrelated environments.</p>
+            </div>
+            <div class="content-text">
+                <p>Shai-Hulud showed how an attacker can turn that trust network into an <strong>automated propagation mechanism</strong>. Instead of relying solely on users clicking malicious links or executing suspicious files, the worm placed malicious code inside legitimate package versions. The installation process then became the execution trigger. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+            <div class="content-text">
+                <p>The incident is particularly relevant to cybersecurity because developer workstations and CI/CD systems often contain credentials with access to source repositories, package registries, cloud platforms, deployment systems and other business services. A malicious dependency therefore has the potential to become an <strong>identity-compromise event</strong> and a <strong>software-delivery compromise</strong> at the same time.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card attack-card">
+                    <h4>🔍 Key Characteristics</h4>
+                    <ul>
+                        <li><strong>Self-Replicating:</strong> Automatic propagation through npm packages</li>
+                        <li><strong>Credential Theft:</strong> Targets npm, GitHub, AWS, GCP tokens</li>
+                        <li><strong>GitHub Abuse:</strong> Creates malicious repositories and workflows</li>
+                        <li><strong>Exfiltration:</strong> Steals sensitive data and source code</li>
+                        <li><strong>Supply Chain Focus:</strong> Exploits trust in software dependencies</li>
+                    </ul>
+                </div>
+                <div class="card attack-card">
+                    <h4>🎯 Why npm was Attractive</h4>
+                    <ul>
+                        <li>Large number of interconnected packages</li>
+                        <li>Automatic dependency installation</li>
+                        <li>Maintainer accounts with publishing rights</li>
+                        <li>Developer environments with credentials</li>
+                        <li>Rapid package distribution</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Background -->
+    <div class="section">
+        <div class="section-title background">
+            📦 3. Background: npm and the Software Supply Chain
+        </div>
+        <div class="section-content">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">3.1 What is npm?</h3>
+            <div class="content-text">
+                <p><strong>npm</strong> is the package-management ecosystem widely used by JavaScript and Node.js developers. Projects define dependencies in <strong>package.json</strong> and commonly use lockfiles such as <strong>package-lock.json</strong> to record resolved versions. During installation, npm processes package metadata and may execute lifecycle scripts associated with packages. (npm, 2026)</p>
+            </div>
+            <div class="content-text">
+                <p>Lifecycle scripts are a normal part of npm functionality. npm documentation describes <strong>preinstall, install and postinstall</strong> events as part of the lifecycle for npm install. This capability is useful for legitimate build and setup tasks, but it also means that <strong>installing a dependency can cause code supplied by that dependency to execute in the local environment</strong>. (npm, 2026)</p>
+            </div>
+
+            <h3 style="color: #2c3e50; margin: 25px 0 15px 0;">3.2 Software Supply-Chain Attacks</h3>
+            <div class="content-text">
+                <p>A software supply-chain attack compromises software, a package, a developer account, a build process or another component used to create and distribute software. The attacker then uses the <strong>trust already placed in that component</strong> to reach downstream users. (ReversingLabs, 2025a; Wiz, 2025)</p>
+            </div>
+            <div class="content-text">
+                <p><strong>MITRE ATT&CK</strong> classifies compromise of software dependencies and development tools under <strong>T1195.001</strong>. npm and other package ecosystems are specifically identified as potential supply-chain targets because dependencies can carry malicious code into consuming applications. (MITRE ATT&CK, 2026)</p>
+            </div>
+
+            <div class="code-block">
+                <span class="comment">// Example: How npm lifecycle scripts work</span>
+                <span class="keyword">npm install</span> <span class="comment">// Triggers lifecycle scripts</span><br>
+                <span class="keyword">preinstall</span> <span class="comment">// Runs before installation</span><br>
+                <span class="keyword">install</span> <span class="comment">// Runs during installation</span><br>
+                <span class="keyword">postinstall</span> <span class="comment">// <-- Used by Shai-Hulud to execute malicious code</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: What is Shai-Hulud -->
+    <div class="section">
+        <div class="section-title background" style="background: #2c3e50;">
+            🐛 4. What is Shai-Hulud?
+        </div>
+        <div class="section-content">
+            <div class="content-text">
+                <p><strong>Shai-Hulud</strong> is the name given to a self-replicating npm supply-chain worm first detected in September 2025. ReversingLabs described it as a <strong>"first-of-its-kind registry-native worm"</strong> because its propagation mechanism operated through npm packages and maintainer accounts rather than relying on a conventional network exploit. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+            <div class="content-text">
+                <p>The name comes from the open-source repository associated with the malicious code and references the <strong>giant sandworms of the Dune universe</strong>. The name became a useful identifier for the incident because attacker-created repositories and branches also used Shai-Hulud-related naming conventions. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Analysis: Worm Behavior</h4>
+                <p>Shai-Hulud's behavior is significant because it represents a <strong>new class of malware</strong> that operates at the software development ecosystem level:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Registry-Native:</strong> Uses npm's own distribution mechanisms</li>
+                    <li><strong>Self-Propagating:</strong> Automatically spreads through package dependencies</li>
+                    <li><strong>Credential-Centric:</strong> Focuses on stealing development credentials</li>
+                    <li><strong>GitHub-Integrated:</strong> Uses GitHub for exfiltration and further propagation</li>
+                    <li><strong>Multi-Stage:</strong> Combines package infection, secret discovery, and data exfiltration</li>
+                </ul>
+            </div>
+
+            <div class="grid-2">
+                <div class="card attack-card">
+                    <h4>🔬 Core Capabilities</h4>
+                    <ul>
+                        <li><strong>Package Infection:</strong> Inserts malicious code into legitimate packages</li>
+                        <li><strong>Automatic Propagation:</strong> Uses compromised accounts to spread</li>
+                        <li><strong>Secret Discovery:</strong> Uses TruffleHog to find credentials</li>
+                        <li><strong>GitHub Exfiltration:</strong> Creates repositories and workflows for data theft</li>
+                        <li><strong>Private Repository Exposure:</strong> Makes private repos public</li>
+                    </ul>
+                </div>
+                <div class="card impact-card">
+                    <h4>⚠️ Impact Vectors</h4>
+                    <ul>
+                        <li><strong>Credential Theft:</strong> npm, GitHub, AWS, GCP tokens</li>
+                        <li><strong>Source Code Exposure:</strong> Private repositories made public</li>
+                        <li><strong>CI/CD Compromise:</strong> Workflows hijacked for further attacks</li>
+                        <li><strong>Supply Chain Poisoning:</strong> Trusted packages become malicious</li>
+                        <li><strong>Persistent Access:</strong> Stolen credentials remain valid after cleanup</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 5: Discovery -->
+    <div class="section">
+        <div class="section-title attack">
+            🔍 5. Discovery and Patient Zero
+        </div>
+        <div class="section-content">
+            <div class="content-text">
+                <p>ReversingLabs reported that its researchers first detected the <strong>cascading compromise on 15 September 2025</strong>. The first known compromised package was <strong>rxt-authentication version 0.0.3</strong>, published on <strong>14 September 2025 at 17:58:50 UTC</strong>. The maintainer account associated with that package was therefore described as the campaign's <strong>Patient Zero</strong> based on the available evidence. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+            <div class="content-text">
+                <p>The exact initial compromise method was not conclusively established in the research. ReversingLabs noted similarities with other recent attacks against open-source maintainers, including techniques involving <strong>credential theft, social engineering and abuse of development workflows</strong>. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+
+            <div class="card attack-card">
+                <h4>📋 Discovery Timeline</h4>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 8px 0; font-weight: bold;">First known compromised package</td>
+                        <td style="padding: 8px 0;">rxt-authentication</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 8px 0; font-weight: bold;">Compromised version</td>
+                        <td style="padding: 8px 0;">0.0.3</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 8px 0; font-weight: bold;">Publication time</td>
+                        <td style="padding: 8px 0;">14 September 2025, 17:58:50 UTC</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 8px 0; font-weight: bold;">First detected</td>
+                        <td style="padding: 8px 0;">15 September 2025</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px 0; font-weight: bold;">Propagation medium</td>
+                        <td style="padding: 8px 0;">npm packages and maintainer publishing access</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="figure-ref">
+                <strong>📊 Key Finding:</strong> Once the compromised account was under attacker control, the worm could use the account's package-publishing privileges to infect other packages maintained by that account. This converted a single account compromise into a <strong>distribution mechanism</strong>.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 6: Attack Overview -->
+    <div class="section">
+        <div class="section-title attack">
+            ⚔️ 6. Attack Overview
+        </div>
+        <div class="section-content">
+            <div class="content-text">
+                <p>At a high level, the original Shai-Hulud attack can be represented as a <strong>seven-stage chain</strong>:</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card attack-card">
+                    <h4>🔄 7-Stage Attack Chain</h4>
+                    <ol style="padding-left: 20px; color: #555;">
+                        <li><strong>Account Compromise:</strong> npm maintainer account is compromised</li>
+                        <li><strong>Package Publishing:</strong> Malicious versions of packages are published</li>
+                        <li><strong>Installation:</strong> Developers or CI systems install infected packages</li>
+                        <li><strong>Execution:</strong> postinstall script executes malicious bundle.js</li>
+                        <li><strong>Discovery:</strong> Payload searches for credentials and secrets</li>
+                        <li><strong>GitHub Activity:</strong> Stolen credentials used for GitHub operations</li>
+                        <li><strong>Propagation:</strong> Newly compromised accounts become additional propagation points</li>
+                    </ol>
+                </div>
+                <div class="card attack-card">
+                    <h4>🌀 Feedback Loop</h4>
+                    <p>The most important characteristic is the <strong>feedback loop</strong>. In a traditional supply-chain attack, a malicious package may compromise many downstream users but stop there. Shai-Hulud could use credentials recovered from one victim to compromise additional packages, which could then infect more victims.</p>
+                    <span class="risk-level risk-critical">CRITICAL - Self-Replicating</span>
+                </div>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Attack Analysis</h4>
+                <p>Shai-Hulud's attack chain demonstrates <strong>advanced threat actor capabilities</strong>:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Lateral Movement:</strong> The worm moves between accounts and packages</li>
+                    <li><strong>Credential Harvesting:</strong> Actively searches for high-value credentials</li>
+                    <li><strong>Persistent Access:</strong> Stolen credentials provide continued access</li>
+                    <li><strong>Multi-Cloud:</strong> Targets AWS and GCP credentials for cloud access</li>
+                    <li><strong>Tool Abuse:</strong> Uses legitimate security tools (TruffleHog) maliciously</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 7: Technical Details -->
+    <div class="section">
+        <div class="section-title attack" style="background: #8e44ad;">
+            🔬 7. Technical Details
+        </div>
+        <div class="section-content">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Initial Access and Account Compromise</h3>
+            <div class="content-text">
+                <p>The initial compromise of the first maintainer account remains an important uncertainty. ReversingLabs explicitly stated that <strong>the exact nature of the initial compromise was not known</strong>. Similar contemporary incidents involved phishing, social engineering and compromised development workflows. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+
+            <h3 style="color: #2c3e50; margin: 25px 0 15px 0;">Malicious npm Package and postinstall Execution</h3>
+            <div class="content-text">
+                <p>The worm injected a malicious JavaScript payload into legitimate packages. ReversingLabs described the main malicious component as a <strong>3MB+ JavaScript file named bundle.js</strong>. The infected package included a postinstall action that caused bundle.js to execute when the package was installed. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+
+            <div class="code-block">
+                <span class="comment">// package.json with malicious postinstall</span>
+                {<br>
+                &nbsp;&nbsp;<span class="string">"name"</span>: <span class="string">"rxt-authentication"</span>,<br>
+                &nbsp;&nbsp;<span class="string">"version"</span>: <span class="string">"0.0.3"</span>,<br>
+                &nbsp;&nbsp;<span class="string">"scripts"</span>: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"postinstall"</span>: <span class="string">"node bundle.js"</span> <span class="comment">// <-- Malicious execution</span><br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+
+            <div class="content-text">
+                <p>The technique exploited a <strong>normal npm feature</strong> rather than a software vulnerability. npm lifecycle scripts are designed to support legitimate package setup operations. The security problem arises when a trusted package contains a malicious lifecycle script, because the package manager itself becomes the mechanism that launches the payload. (npm, 2026)</p>
+            </div>
+
+            <h3 style="color: #2c3e50; margin: 25px 0 15px 0;">Credential and Secret Theft</h3>
+            <div class="content-text">
+                <p>Credential theft was a <strong>central objective</strong> of Shai-Hulud. The malware searched for authentication material that could provide access to software-development and cloud environments. ReversingLabs specifically identified <strong>npm, GitHub, AWS and GCP tokens</strong> among the targeted credentials. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+
+            <div class="card attack-card">
+                <h4>🔑 Targeted Credential Types</h4>
+                <ul>
+                    <li>npm publishing and authentication credentials</li>
+                    <li>GitHub access tokens</li>
+                    <li>AWS credentials and tokens</li>
+                    <li>Google Cloud Platform credentials</li>
+                    <li>Environment variables and other secrets</li>
+                    <li>Secrets discovered in files and repositories through secret-scanning</li>
+                </ul>
+            </div>
+
+            <h3 style="color: #2c3e50; margin: 25px 0 15px 0;">TruffleHog and Secret Discovery</h3>
+            <div class="content-text">
+                <p>The Shai-Hulud payload used <strong>TruffleHog</strong> to increase its ability to locate secrets. ReversingLabs noted that TruffleHog can identify <strong>more than 800 types of secrets</strong>. The use of an established secret-scanning utility allowed the malware to search for credentials beyond a small hard-coded list of token locations. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Technical Insight</h4>
+                <p>The use of TruffleHog demonstrates a <strong>sophisticated attacker technique</strong>:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Tool Repurposing:</strong> Legitimate security tools are used for malicious discovery</li>
+                    <li><strong>Broad Coverage:</strong> TruffleHog detects 800+ types of secrets</li>
+                    <li><strong>Automated Discovery:</strong> No need to hard-code specific secret locations</li>
+                    <li><strong>Cross-Platform:</strong> Works across different cloud providers and services</li>
+                    <li><strong>Detection Challenge:</strong> Security teams must monitor for unexpected tool execution</li>
+                </ul>
+            </div>
+
+            <h3 style="color: #2c3e50; margin: 25px 0 15px 0;">GitHub Abuse and Data Exfiltration</h3>
+            <div class="content-text">
+                <p>Stolen GitHub access tokens enabled the malware to use compromised accounts for data collection and exfiltration. ReversingLabs reported that the malware created GitHub repositories named <strong>Shai-Hulud Repository</strong> and placed stolen information in a file called <strong>data.json</strong>. The data was <strong>double Base64-encoded</strong> before upload. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card attack-card">
+                    <h4>📊 GitHub Behaviors</h4>
+                    <ul>
+                        <li>Created repositories with "Shai-Hulud" naming</li>
+                        <li>Placed data.json with encoded stolen data</li>
+                        <li>Created "shai-hulud" branches in existing repos</li>
+                        <li>Added malicious GitHub Actions workflows</li>
+                        <li>Made private repositories public with "-migration" suffix</li>
+                    </ul>
+                </div>
+                <div class="card impact-card">
+                    <h4>🔍 Detection Opportunities</h4>
+                    <ul>
+                        <li>Audit repository creation events</li>
+                        <li>Inspect unexpected repository contents</li>
+                        <li>Monitor branch creation patterns</li>
+                        <li>Review workflow file changes</li>
+                        <li>Alert on private-to-public changes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <span class="comment">// Example of GitHub exfiltration pattern</span>
+                <span class="keyword">POST</span> /repos/&lt;org&gt;/&lt;repo&gt;<br>
+                <span class="keyword">Content:</span> {"name": "Shai-Hulud Repository"}<br>
+                <span class="keyword">POST</span> /repos/&lt;org&gt;/Shai-Hulud-Repository/contents/data.json<br>
+                <span class="keyword">Content:</span> {"content": "&lt;double-base64-encoded-data&gt;"}
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 8: Impact Assessment -->
+    <div class="section">
+        <div class="section-title impact">
+            💥 8. Impact Assessment
+        </div>
+        <div class="section-content">
+            <div class="grid-2">
+                <div class="card impact-card">
+                    <h4>🔒 8.1 Confidentiality Impact</h4>
+                    <p>The strongest confidentiality impact came from <strong>secret theft and repository exposure</strong>. Credentials, API tokens, source code and private project information could be exposed. A stolen credential may also provide access to systems beyond the original developer environment. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+                    <span class="risk-level risk-critical">CRITICAL</span>
+                </div>
+                <div class="card impact-card">
+                    <h4>✅ 8.2 Integrity Impact</h4>
+                    <p>Integrity was affected because <strong>legitimate package versions could be modified and republished with malicious code</strong>. GitHub workflows and repository structures could also be changed using compromised credentials. (GitHub, 2025a; GitHub, 2025b)</p>
+                    <span class="risk-level risk-critical">CRITICAL</span>
+                </div>
+                <div class="card impact-card">
+                    <h4>📡 8.3 Availability Impact</h4>
+                    <p>Availability was not the primary objective of the original campaign. However, compromised credentials, package removal, emergency credential rotation and rebuilding of development environments can create <strong>operational disruption</strong>. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+                    <span class="risk-level risk-high">HIGH</span>
+                </div>
+                <div class="card impact-card">
+                    <h4>🏢 8.4 Business Impact</h4>
+                    <ul>
+                        <li>Emergency investigation of developer and CI environments</li>
+                        <li>Credential revocation and replacement</li>
+                        <li>Rebuilding or reinstalling affected development systems</li>
+                        <li>Verification of package and release integrity</li>
+                        <li>Potential exposure of proprietary source code</li>
+                        <li>Loss of trust in automated dependency updates</li>
+                        <li>Engineering and security resources diverted to incident response</li>
+                    </ul>
+                    <span class="risk-level risk-critical">CRITICAL</span>
+                </div>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Impact Analysis</h4>
+                <p>Shai-Hulud's impact extends beyond immediate technical effects:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Trust Erosion:</strong> Developers lose confidence in npm packages and automated updates</li>
+                    <li><strong>Supply Chain Risk:</strong> Demonstrates that any package can become malicious</li>
+                    <li><strong>Identity Security:</strong> Stolen credentials provide persistent access</li>
+                    <li><strong>Operational Disruption:</strong> Incident response diverts engineering resources</li>
+                    <li><strong>Reputational Damage:</strong> Organizations with compromised packages face reputation loss</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 9: Timeline -->
+    <div class="section">
+        <div class="section-title impact" style="background: #2c3e50;">
+            ⏱️ 9. Timeline
+        </div>
+        <div class="section-content">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-date">14 September 2025</div>
+                    <div class="timeline-title">First Compromised Package Published</div>
+                    <div class="timeline-desc"><strong>rxt-authentication 0.0.3</strong> published; identified by ReversingLabs as the first known compromised package.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-date">15 September 2025</div>
+                    <div class="timeline-title">Attack Detected</div>
+                    <div class="timeline-desc">ReversingLabs detected the <strong>cascading Shai-Hulud compromise</strong>.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-date">15-16 September 2025</div>
+                    <div class="timeline-title">Rapid Propagation</div>
+                    <div class="timeline-desc"><strong>Hundreds of npm packages</strong> were identified as compromised; researchers reported rapid propagation.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-date">16-19 September 2025</div>
+                    <div class="timeline-title">Research & Analysis</div>
+                    <div class="timeline-desc">Security researchers published additional technical analysis, package lists and indicators.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">5</div>
+                    <div class="timeline-date">Late September 2025</div>
+                    <div class="timeline-title">GitHub Response</div>
+                    <div class="timeline-desc">GitHub announced <strong>stronger npm authentication</strong>, token-lifetime and trusted-publishing measures in response.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">6</div>
+                    <div class="timeline-date">October 2025 onward</div>
+                    <div class="timeline-title">Industry Impact</div>
+                    <div class="timeline-desc">The September campaign became a <strong>major reference case</strong> for software-supply-chain and npm security.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 10: MITRE ATT&CK Mapping -->
+    <div class="section">
+        <div class="section-title attack" style="background: #8e44ad;">
+            📊 10. MITRE ATT&CK Mapping
+        </div>
+        <div class="section-content">
+            <div class="content-text">
+                <p>MITRE ATT&CK provides a useful framework for translating the Shai-Hulud incident into <strong>standardized adversary behavior</strong>.</p>
+            </div>
+
+            <table class="attack-table">
+                <thead>
+                    <tr>
+                        <th>ATT&CK Technique</th>
+                        <th>Application to Shai-Hulud</th>
+                        <th>Evidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>T1195.001</strong></td>
+                        <td>Compromise Software Dependencies and Development Tools</td>
+                        <td>Malicious code inserted into npm packages and propagated through package dependencies</td>
+                    </tr>
+                    <tr>
+                        <td><strong>T1552</strong></td>
+                        <td>Unsecured Credentials</td>
+                        <td>Malware targeted npm, GitHub, AWS, GCP and other secret material</td>
+                    </tr>
+                    <tr>
+                        <td><strong>T1071.001</strong></td>
+                        <td>Web Protocols (contextual)</td>
+                        <td>Web-based GitHub/API communication and external web endpoints</td>
+                    </tr>
+                    <tr>
+                        <td><strong>T1027</strong></td>
+                        <td>Obfuscated/Encoded Files or Information</td>
+                        <td>Double Base64 encoding of exfiltrated data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>T1567.002</strong></td>
+                        <td>Exfiltration to Cloud Storage (contextual)</td>
+                        <td>GitHub used as the exfiltration repository platform</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="figure-ref" style="margin-top: 20px;">
+                <strong>📊 MITRE ATT&CK Classification:</strong> The strongest and most directly supported classification is <strong>T1195.001 - Compromise Software Dependencies and Development Tools</strong>. MITRE's software entry for Shai-Hulud identifies it as a supply-chain worm that spreads through code repositories, including GitHub and npm packages.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 11: Incident Response -->
+    <div class="section">
+        <div class="section-title response">
+            🚨 11. Incident Response
+        </div>
+        <div class="section-content">
+            <div class="grid-2">
+                <div class="card response-card">
+                    <h4>🔍 11.1 Identify</h4>
+                    <ol style="padding-left: 20px; color: #555;">
+                        <li>Determine whether any affected package versions were installed</li>
+                        <li>Identify developer machines, build agents and CI runners</li>
+                        <li>Review npm, GitHub and cloud credentials accessible</li>
+                        <li>Search GitHub for suspicious repositories, branches, workflows</li>
+                        <li>Collect package versions, hashes and relevant logs</li>
+                    </ol>
+                </div>
+                <div class="card response-card">
+                    <h4>⛔ 11.2 Contain</h4>
+                    <ol style="padding-left: 20px; color: #555;">
+                        <li>Stop use of affected package versions</li>
+                        <li>Temporarily restrict package publishing where necessary</li>
+                        <li>Disable or isolate compromised developer and CI identities</li>
+                        <li>Restrict suspicious GitHub workflows and repositories</li>
+                        <li>Block known malicious destinations where appropriate</li>
+                    </ol>
+                </div>
+                <div class="card response-card">
+                    <h4>🧹 11.3 Eradicate</h4>
+                    <ol style="padding-left: 20px; color: #555;">
+                        <li>Remove infected dependencies and restore known-good versions</li>
+                        <li>Rebuild affected development and CI environments</li>
+                        <li>Remove unauthorized workflows, branches and repositories</li>
+                        <li>Revoke and replace potentially exposed credentials</li>
+                        <li>Verify package integrity before resuming releases</li>
+                    </ol>
+                </div>
+                <div class="card response-card">
+                    <h4>🔁 11.4 Recover</h4>
+                    <ol style="padding-left: 20px; color: #555;">
+                        <li>Restore development and CI operations from clean environments</li>
+                        <li>Reissue credentials using least-privilege scopes</li>
+                        <li>Validate software builds and release artifacts</li>
+                        <li>Monitor identity, package and GitHub activity for recurrence</li>
+                        <li>Document root cause and improve supply-chain controls</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Response Analysis</h4>
+                <p>Effective incident response for Shai-Hulud requires <strong>coordinated action across multiple domains</strong>:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Identity Security:</strong> Immediate credential rotation for all potentially exposed tokens</li>
+                    <li><strong>Package Management:</strong> Identify and remove malicious package versions</li>
+                    <li><strong>GitHub Security:</strong> Audit and clean up suspicious repositories and workflows</li>
+                    <li><strong>Development Environment:</strong> Rebuild from known-good sources</li>
+                    <li><strong>Continuous Monitoring:</strong> Enhanced monitoring for recurrence</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 12: Prevention and Mitigation -->
+    <div class="section">
+        <div class="section-title mitigation">
+            🛡️ 12. Prevention and Mitigation
+        </div>
+        <div class="section-content">
+            <div class="grid-3">
+                <div class="card mitigation-card">
+                    <h4>🔐 Critical Controls</h4>
+                    <ul>
+                        <li><strong>MFA / Phishing-resistant authentication</strong> for maintainers</li>
+                        <li><strong>Short-lived and granular npm tokens</strong></li>
+                        <li><strong>Trusted publishing / OIDC</strong> for CI/CD</li>
+                        <li><strong>Least-privilege CI identities</strong></li>
+                    </ul>
+                </div>
+                <div class="card mitigation-card">
+                    <h4>📦 Package Security</h4>
+                    <ul>
+                        <li><strong>Dependency pinning</strong> and lockfiles</li>
+                        <li><strong>Software Composition Analysis (SCA)</strong></li>
+                        <li><strong>SBOM</strong> for rapid identification</li>
+                        <li><strong>Install-script governance</strong></li>
+                    </ul>
+                </div>
+                <div class="card mitigation-card">
+                    <h4>🔍 Monitoring</h4>
+                    <ul>
+                        <li><strong>GitHub branch and workflow protection</strong></li>
+                        <li><strong>EDR and developer endpoint monitoring</strong></li>
+                        <li><strong>SIEM correlation</strong> for integrated detection</li>
+                        <li><strong>Centralized secret management</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Mitigation Strategy</h4>
+                <p>Preventing attacks like Shai-Hulud requires a <strong>defense-in-depth approach</strong>:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Identity Layer:</strong> Strong authentication with MFA and short-lived tokens</li>
+                    <li><strong>Package Layer:</strong> SBOM, SCA, and install-script governance</li>
+                    <li><strong>GitHub Layer:</strong> Branch protection, workflow review, and audit logging</li>
+                    <li><strong>Endpoint Layer:</strong> EDR, behavioral monitoring, and process detection</li>
+                    <li><strong>Correlation Layer:</strong> SIEM integration for cross-domain detection</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 13: Conclusion -->
+    <div class="section">
+        <div class="section-title conclusion">
+            📝 13. Conclusion
+        </div>
+        <div class="section-content">
+            <div class="content-text">
+                <p>The original September 2025 Shai-Hulud campaign demonstrated a <strong>major change in the way software supply-chain attacks can operate</strong>. The attacker did not simply place malware in an isolated package. The campaign used compromised npm publishing authority, package lifecycle execution, credential discovery, GitHub abuse and automatic republishing to create a <strong>self-propagating loop</strong>. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+            <div class="content-text">
+                <p>The most important lesson is that <strong>software dependencies must be treated as part of the organization's security perimeter</strong>. Protecting production servers while leaving developer accounts, package registries, CI/CD credentials, GitHub workflows and cloud tokens insufficiently protected creates a <strong>major blind spot</strong>. (GitHub, 2025a; GitHub, 2025b)</p>
+            </div>
+            <div class="content-text">
+                <p>Effective defense requires multiple layers: <strong>strong maintainer authentication, short-lived credentials, trusted publishing, dependency monitoring, software composition analysis, SBOMs, install-script governance, least-privilege CI/CD, GitHub monitoring, endpoint detection and rapid credential rotation</strong>. (GitHub, 2025a; GitHub, 2025b)</p>
+            </div>
+
+            <div class="ai-insight">
+                <h4><span class="ai-icon">🤖</span> AI Final Analysis</h4>
+                <p>Shai-Hulud should be remembered not merely as a malicious npm package incident, but as a <strong>demonstration of how the modern software-development ecosystem can become a worm propagation platform</strong> when trust, automation and excessive credential access intersect. (ReversingLabs, 2025a; ReversingLabs, 2025b)</p>
+            </div>
+
+            <div class="card mitigation-card" style="margin-top: 20px;">
+                <h4>🔑 Key Takeaways</h4>
+                <ul>
+                    <li><strong>Supply chain security:</strong> Every dependency is a potential attack vector</li>
+                    <li><strong>Identity security:</strong> Developer credentials must be protected like production secrets</li>
+                    <li><strong>Zero-Trust:</strong> Never trust packages or maintainers implicitly</li>
+                    <li><strong>Defense in depth:</strong> Multiple layers of security are essential</li>
+                    <li><strong>Continuous monitoring:</strong> Detect and respond to supply chain threats proactively</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p class="footer-name"><strong>Shai-Hulud npm Worm - Supply Chain Attack Case Study</strong></p>
+        <p>Cyber Security in Computing | Bijay Kumar Yadav</p>
+        <p>London Met ID: 24046367 | College ID: NP01NT4A240108</p>
+        <p style="margin-top: 10px;">References: ReversingLabs (2025a, 2025b), GitHub (2025a, 2025b), MITRE ATT&CK (2026), npm (2026), Wiz (2025)</p>
+        <p style="margin-top: 10px; font-size: 0.7rem; opacity: 0.5;">© 2026 Bijay Kumar Yadav | All Rights Reserved</p>
+    </div>
+</div>
+</body>
+</html>
