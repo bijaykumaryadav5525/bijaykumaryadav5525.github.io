@@ -134,7 +134,7 @@ export default function Header() {
               {/* Cyber Quiz Button - Mobile with Large Tooltip */}
               <div className="group relative">
                 <a
-                  href="https://your-learning-platform.com"
+                  href="https://netsec.bijaykumaryadav78.com.np/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={handleLinkClick}
