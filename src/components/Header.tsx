@@ -73,7 +73,7 @@ export default function Header() {
               {/* Cyber Quiz Button - Desktop with Large Tooltip */}
               <div className="group relative">
                 <a
-                  href="https://your-learning-platform.com"
+                  href="https://netsec.bijaykumaryadav78.com.np/"   // ✅ FIXED URL
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#e55b1c] shadow-[0_0_20px_rgba(255,255,255,0.25)] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] whitespace-nowrap"
@@ -83,7 +83,7 @@ export default function Header() {
                 </a>
                 {/* Tooltip - Now larger */}
                 <span className="pointer-events-none absolute top-full left-1/2 z-50 mt-2 w-max max-w-[320px] -translate-x-1/2 rounded-md bg-[#1d1d1d] px-4 py-3 text-center text-sm font-medium text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
-                  Practice networking and cybersecurity MCQs, plus certificate guidance
+                  Practice MCQs about networking and cyber security (NetSec)
                 </span>
               </div>
             </div>
